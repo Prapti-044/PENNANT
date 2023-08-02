@@ -13,16 +13,16 @@ BINARY := $(BUILDDIR)/$(PRODUCT)
 # begin compiler-dependent flags
 #
 # gcc flags:
-#CXX := g++
-#CXXFLAGS_DEBUG := -g
-#CXXFLAGS_OPT := -O3
-#CXXFLAGS_OPENMP := -fopenmp
+CXX := g++
+CXXFLAGS_DEBUG := -g
+CXXFLAGS_OPT := -O3
+CXXFLAGS_OPENMP := -fopenmp
 
 # intel flags:
-CXX := icpc
-CXXFLAGS_DEBUG := -g
-CXXFLAGS_OPT := -O3 -fast -fno-alias
-CXXFLAGS_OPENMP := -openmp
+# CXX := icpc
+# CXXFLAGS_DEBUG := -g
+# CXXFLAGS_OPT := -O3 -fast -fno-alias
+# CXXFLAGS_OPENMP := -openmp
 
 # pgi flags:
 #CXX := pgCC
@@ -33,7 +33,7 @@ CXXFLAGS_OPENMP := -openmp
 # end compiler-dependent flags
 
 # select optimized or debug
-CXXFLAGS := $(CXXFLAGS_OPT)
+CXXFLAGS := $(CXXFLAGS_OPT) $(CXXFLAGS_DEBUG) $(CXXFLAGS_OPENMP)
 #CXXFLAGS := $(CXXFLAGS_DEBUG)
 
 # add mpi to compile (comment out for serial build)
@@ -43,7 +43,6 @@ CXX := mpicxx
 CXXFLAGS += -DUSE_MPI
 
 # add openmp flags (comment out for serial build)
-CXXFLAGS += $(CXXFLAGS_OPENMP)
 LDFLAGS += $(CXXFLAGS_OPENMP)
 
 LD := $(CXX)
